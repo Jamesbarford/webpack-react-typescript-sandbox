@@ -1,5 +1,5 @@
 # React / TypeScript App Boilerplate Setup ⚛
-## With webpack, typescript and sass
+## With webpack, typescript and sass 👍
 
 This is simply to save time for a front end build setup without the overhead of create react app.
 
@@ -7,8 +7,8 @@ It is highly configurable and provides a solid base to build projects off with t
 
 # Modes: Development | Production 💃🏻 🕺🏻
 
-# Install
-## Requirements: node v 8.12^, npm
+# Install 💾
+## Requirements: node v 8.12^ & npm 🚩
 - `npm install` to install dev & dependencies.
 - `npm start` to run the app in development mode.
 - `npm build` to build app in production mode.
