@@ -2,21 +2,37 @@ const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-const devMode = "development";
-const prodMode = "production";
-const mode = process.env.NODE_ENV === devMode ? devMode : prodMode;
+const production = process.env.NODE_ENV === "production";
+const analyse = process.env.NODE_ENV === "analyse";
+const development = process.env.NODE_ENV === "development";
 
-console.log({ mode });
+console.log({ development, production, analyse });
 
-module.exports = {
+const WebpackConfig = {
   entry: "./src/App/index.tsx",
-  mode,
   output: {
-      filename: "[name].bundle.js",
+      filename: "[name].[contenthash].js",
       path: path.resolve(__dirname, 'dist'),
   },
-  devtool: "source-map",
+  // To split chunks
+  optimization: {
+    runtimeChunk: 'single',
+      splitChunks: {
+        automaticNameDelimiter: '~',
+        name: true,
+        maxSize: 3000,
+        cacheGroups: {
+          vendor: {
+            test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+            name: 'vendors',
+            chunks: 'all'
+          }
+        }
+      }
+  },
+  devtool: process.env.NODE_ENV === "development" ? "inline-source-map" : "source-map",
   resolve: {
     extensions: [".js", ".json", ".ts", ".tsx"],
   },
@@ -42,11 +58,14 @@ module.exports = {
     ]
   },
   plugins: [
-    new MiniCssExtractPlugin({ filename: "style.css" }),
+    new MiniCssExtractPlugin({ filename: "[name].[contenthash].css" }),
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
-      title: "Webpack React Typescript Sandbox",
       template: 'template.html'
     })
   ]
 };
+
+if (analyse) WebpackConfig.plugins.push(new BundleAnalyzerPlugin());
+
+module.exports = WebpackConfig;
