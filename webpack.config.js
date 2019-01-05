@@ -1,8 +1,8 @@
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CleanWebpackPlugin = require("clean-webpack-plugin");
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 const production = process.env.NODE_ENV === "production";
 const analyse = process.env.NODE_ENV === "analyse";
@@ -16,19 +16,19 @@ const WebpackConfig = {
   mode,
   output: {
       filename: "[name].[contenthash].js",
-      path: path.resolve(__dirname, 'dist'),
+      path: path.resolve(__dirname, "dist"),
   },
   // To split chunks
   optimization: {
-    runtimeChunk: 'single',
+    runtimeChunk: "single",
     splitChunks: {
-      automaticNameDelimiter: '~',
+      automaticNameDelimiter: "~",
       name: true,
       cacheGroups: {
         vendor: {
           test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
-          name: 'vendors',
-          chunks: 'all'
+          name: "vendors",
+          chunks: "all"
         }
       }
     }
@@ -38,7 +38,7 @@ const WebpackConfig = {
     extensions: [".js", ".json", ".ts", ".tsx"],
   },
   devServer: {
-    contentBase: './dist'
+    contentBase: "./dist"
   },
   module: {
     rules: [
@@ -60,10 +60,8 @@ const WebpackConfig = {
   },
   plugins: [
     new MiniCssExtractPlugin({ filename: "[name].[contenthash].css" }),
-    new CleanWebpackPlugin(['dist']),
-    new HtmlWebpackPlugin({
-      template: 'template.html'
-    })
+    new CleanWebpackPlugin(["dist"]),
+    new HtmlWebpackPlugin({ template: "template.html" })
   ]
 };
 
