@@ -11,11 +11,15 @@ module.exports = {
     extensions: ['.js', '.json', '.ts', '.tsx'],
   },
   module: {
-      rules: [
-          {
-              test: /\.(ts|tsx)$/,
-              loader: "awesome-typescript-loader"
-          },
-      ]
+    rules: [
+      {
+          test: /\.(ts|tsx)$/,
+          loader: "awesome-typescript-loader"
+      },
+      {
+      test: /\.scss$/,
+        use: [ "style-loader", "css-loader", "sass-loader" ]
+      }
+    ]
   },
 };
