@@ -19,18 +19,18 @@ const WebpackConfig = {
   // To split chunks
   optimization: {
     runtimeChunk: 'single',
-      splitChunks: {
-        automaticNameDelimiter: '~',
-        name: true,
-        maxSize: 3000,
-        cacheGroups: {
-          vendor: {
-            test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
-            name: 'vendors',
-            chunks: 'all'
-          }
+    splitChunks: {
+      automaticNameDelimiter: '~',
+      name: true,
+      maxSize: 3000,
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+          name: 'vendors',
+          chunks: 'all'
         }
       }
+    }
   },
   devtool: process.env.NODE_ENV === "development" ? "inline-source-map" : "source-map",
   resolve: {
