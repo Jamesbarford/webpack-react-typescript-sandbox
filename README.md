@@ -5,8 +5,6 @@ This is simply to save time for a front end build setup without the overhead of 
 
 It is highly configurable and provides a solid base to build projects off with the ability to do bundle splitting and async imports.
 
-# Modes: Development | Production 💃🏻 🕺🏻
-
 # Install 💾
 ## Requirements: node v 8.12^ & npm 🚩
 - `npm install` to install dev & dependencies.
@@ -14,6 +12,7 @@ It is highly configurable and provides a solid base to build projects off with t
 - `npm build` to build app in production mode.
 - `npm build:analyse`, a bit of hack slash implementation but could be useful to view the size of the dependancies and dev code written. 
 
+# Modes: Development | Production 🖥 🎪
 ## Development 🖥
 - Setup to use webpack dev server.
 - Watches for changes of any `TypeScript` or `scss` file and will refesh app
