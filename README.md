@@ -1,16 +1,21 @@
 # React / TypeScript App Boilerplate Setup ⚛
-## With webpack, typescript and sass 👍
+## With webpack, typescript, sass & jest 👍
 
 This is simply to save time for a front end build setup without the overhead of create react app.
 
 It is highly configurable and provides a solid base to build projects off with the ability to do bundle splitting and async imports.
+
+Testing is run through jest & enzyme which has been configured for TypeScript. Yahoo!
 
 # Install 💾
 ## Requirements: node v 8.12^ & npm 🚩
 - `npm install` to install dev & dependencies.
 - `npm start` to run the app in development mode.
 - `npm build` to build app in production mode.
-- `npm build:analyse`, a bit of hack slash implementation but could be useful to view the size of the dependancies and dev code written. 
+- `npm build:analyse`, a bit of hack slash implementation but 
+could be useful to view the size of the dependancies and dev code written. 
+- `npm run test` runs jest.
+- `npm run test:watch` runst jest in watch mode and will watch files for changes re-running tests.
 
 # Modes: Development | Production 🖥 🎪
 ## Development 🖥
