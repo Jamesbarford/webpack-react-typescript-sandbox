@@ -5,7 +5,7 @@ This is simply to save time for a front end build setup without the overhead of 
 
 It is highly configurable and provides a solid base to build projects off with the ability to do bundle splitting and async imports.
 
-Testing is run through jest & enzyme which has been configured for TypeScript. Yahoo!
+Testing is run through `jest` & `enzyme` which has been configured for `TypeScript`. Yahoo!
 
 # Install 💾
 ## Requirements: node v 8.12^ & npm 🚩
