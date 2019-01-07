@@ -5,11 +5,11 @@
   "description": "Boilerplate React setup with webpack and TypeScript",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
-    "test:watch": "jest --watchAll",
-    "build": "NODE_ENV=production webpack",
     "start": "NODE_ENV=development webpack-dev-server --open",
-    "build:analyse": "NODE_ENV=analyse webpack"
+    "build": "NODE_ENV=production webpack",
+    "build:analyse": "NODE_ENV=analyse webpack",
+    "test": "jest",
+    "test:watch": "jest --watchAll"
   },
   "author": "James Barford-Evans",
   "license": "ISC",

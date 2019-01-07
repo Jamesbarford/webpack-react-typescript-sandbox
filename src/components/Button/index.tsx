@@ -1,3 +1,8 @@
+/**
+ * Example button component that changes from `red` to `blue` on mouse enter
+ * then back to `red` on mouse leave.
+ */
+
 import * as React from "react";
 
 interface MyAmazingButtonState {
