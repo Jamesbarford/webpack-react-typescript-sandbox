@@ -21,7 +21,6 @@ export class MyAmazingButton extends React.Component<{}, MyAmazingButtonState> {
       <button
         onMouseEnter={this.handleOnMouseEnter}
         onMouseLeave={this.handleOnMouseLeave}
-        onClick={this.handleOnMouseEnter}
         style={{ backgroundColor: this.state.btnColor }}
       >
         My button
