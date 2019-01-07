@@ -15,7 +15,7 @@ Testing is run through jest & enzyme which has been configured for TypeScript. Y
 - `npm build:analyse`, a bit of hack slash implementation but 
 could be useful to view the size of the dependancies and dev code written. 
 - `npm run test` runs jest.
-- `npm run test:watch` runst jest in watch mode and will watch files for changes re-running tests.
+- `npm run test:watch` runs jest in watch mode and will watch files for changes re-running tests.
 
 # Modes: Development | Production 🖥 🎪
 ## Development 🖥
