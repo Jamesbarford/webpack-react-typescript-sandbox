@@ -6,8 +6,8 @@ import { render } from "react-dom";
 import { MyAmazingButton } from "../components/Button";
 import "./style.scss";
 
-const App: React.SFC<{}> = () => (
-  <div className="example">
+const App: React.FunctionComponent = () => (
+  <div>
     hello world
     <MyAmazingButton />
   </div>

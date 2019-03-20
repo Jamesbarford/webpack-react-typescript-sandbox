@@ -12,7 +12,7 @@ interface MyAmazingButtonState {
 
 export class MyAmazingButton extends React.Component<{}, MyAmazingButtonState> {
 
-  state = {
+  state: MyAmazingButtonState = {
     btnColor: "red",
     color: "white"
   }
@@ -24,6 +24,7 @@ export class MyAmazingButton extends React.Component<{}, MyAmazingButtonState> {
   render() {
     return (
       <button
+        className="example"
         onMouseEnter={this.handleOnMouseEnter}
         onMouseLeave={this.handleOnMouseLeave}
         style={{ backgroundColor: this.state.btnColor }}

@@ -8,8 +8,8 @@ It is highly configurable and provides a solid base to build projects off with t
 Testing is run through `jest` & `enzyme` which has been configured for `TypeScript`. Yahoo!
 
 # Install 💾
-## Requirements: node v 8.12^ & npm 🚩
-- `npm install` to install dev & dependencies.
+## Requirements: node v 8.12^ & npm  or yarn🚩
+- `npm install` or `yarn` to install dev & dependencies.
 - `npm start` to run the app in development mode.
 - `npm build` to build app in production mode.
 - `npm build:analyse`, a bit of hack slash implementation but 
@@ -29,7 +29,6 @@ could be useful to view the size of the dependancies and dev code written.
 - `template.html` can be written in to change title, add `divs` or whatever else is needed.
 
 #### N.B 😮
-- For `scss` files currently they would need to be `imported` into `src/App/style.scss` and would be bundled into one colossal `css` file which is somewhat unintuitive.
+- For `scss` files currently they would need to be `imported` into `src/App/style.scss` and would be bundled into one `css` file, when in `production` mode this is minfied yahoo!
 - If moving `style.scss` out of `App` change the location in `webpack.config.js`
-- `build:analyse` is not properly configured.
 
