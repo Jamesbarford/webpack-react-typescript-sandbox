@@ -2,13 +2,17 @@
   "compilerOptions": {
     "module": "commonjs",
     "noImplicitAny": true,
+    "noUnusedLocals": true,
+		"noUnusedParameters": true,
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
     "lib": ["es2018", "dom"],
     "target": "es5",
     "sourceMap": true,
     "jsx": "react",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "noEmit": true,
+    "allowJs": false
   },
   "exclude": ["node_modules"]
 }

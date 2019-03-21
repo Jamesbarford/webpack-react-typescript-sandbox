@@ -1,0 +1,26 @@
+{
+  "extends": [
+    "tslint-eslint-rules"
+  ],
+  "linterOptions": {
+    "typeCheck": true
+  },
+  "rules": {
+    "align": {
+      "options": ["parameters", "statements", "members"]
+    },
+    "prefer-const": true,
+    "variable-name": {
+      "options": [
+        "ban-keywords",
+        "check-format",
+        "allow-pascal-case",
+        "allow-leading-underscore"
+      ]
+    },
+    "no-unused-expression": true,
+    "no-trailing-whitespace": true,
+    "no-sparse-arrays": true
+  },
+  "defaultSeverity": "warning"
+}

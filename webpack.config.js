@@ -25,7 +25,7 @@ const WebpackConfig = {
     new MiniCssExtractPlugin({ filename: "[name].[contenthash].css" }),
     new CleanWebpackPlugin(["dist"]),
     new HtmlWebpackPlugin({ template: "template.html" }),
-    new webpack.HashedModuleIdsPlugin(), // so that file hashes don't change unexpectedly
+    new webpack.HashedModuleIdsPlugin(), // so that file hashes don"t change unexpectedly
   ],
   // To split chunks
   optimization: {
@@ -66,7 +66,7 @@ const WebpackConfig = {
           test: /[\\/]node_modules[\\/]/,
           name(module) {
             const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
-            return `npm.${packageName.replace('@', '')}`;
+            return `npm.${packageName.replace("@", "")}`;
           },
         }
       }
@@ -94,11 +94,24 @@ const WebpackConfig = {
     rules: [
       {
         test: /favicon\.ico$/,
-        loader: 'url',
+        loader: "url",
         query: { 
           limit: 1,
-          name: '[name].[ext]',
+          name: "[name].[ext]",
         }
+      },
+      {
+        test: /\.(ts|tsx)$/,
+        exclude: /node_modules/,
+        enforce: "pre",
+        use: [
+          {
+            loader: "tslint-loader",
+            options: {
+              configFile: "./src/tslint.json"
+            }
+          }
+        ]
       },
       {
         test: /\.(ts|tsx)$/,
@@ -131,7 +144,7 @@ const WebpackConfig = {
         test: /\.(png|jpg|gif|svg|ico)$/,
         use: [
           {
-            loader: 'file-loader'
+            loader: "file-loader"
           },
         ],
       },
