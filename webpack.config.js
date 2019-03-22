@@ -7,9 +7,9 @@ const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const TerserPlugin = require("terser-webpack-plugin");
 const babelConfig = require("./babel.config");
 
-const production = process.env.NODE_ENV === "production";
-const analyse = process.env.NODE_ENV === "analyse";
-const development = process.env.NODE_ENV === "development";
+const production = process.env.ENV === "production";
+const analyse = process.env.ENV === "analyse";
+const development = process.env.ENV === "development";
 const mode = development ? "development" : "production";
 
 console.log({ development, production, analyse });

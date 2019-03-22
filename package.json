@@ -4,9 +4,9 @@
   "version": "1.0.0",
   "description": "Boilerplate React setup with webpack and TypeScript",
   "scripts": {
-    "start": "NODE_ENV=development webpack-dev-server",
-    "build": "NODE_ENV=production webpack",
-    "build:analyse": "NODE_ENV=analyse webpack",
+    "start": "ENV=development webpack-dev-server",
+    "build": "ENV=production webpack",
+    "build:analyse": "ENV=analyse webpack",
     "test": "jest",
     "test:watch": "jest --watchAll"
   },

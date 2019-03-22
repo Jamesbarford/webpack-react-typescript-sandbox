@@ -1,6 +1,6 @@
 const common = [ require("autoprefixer")({}), require('postcss-css-variables') ];
 
-const plugins = process.env.NODE_ENV === "production" ?
+const plugins = process.env.ENV === "production" ?
   [
     require("cssnano")({ preset: 'default' }),
    ...common
