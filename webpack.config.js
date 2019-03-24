@@ -121,6 +121,7 @@ const WebpackConfig = {
             loader: "awesome-typescript-loader",
             options: {
               useBabel: true,
+              transpileOnly: true,
               babelOptions: {
                 babelrc: false,
                 presets: babelConfig.presets,
