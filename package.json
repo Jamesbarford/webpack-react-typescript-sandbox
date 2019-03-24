@@ -50,7 +50,6 @@
     "postcss-css-variables": "^0.11.0",
     "postcss-loader": "^3.0.0",
     "postcss-preset-env": "^6.4.0",
-    "postcss-scss": "^2.0.0",
     "sass-loader": "^7.1.0",
     "terser-webpack-plugin": "^1.1.0",
     "ts-jest": "^23.10.5",

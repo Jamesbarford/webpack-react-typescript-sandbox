@@ -1,4 +1,8 @@
-const common = [ require("autoprefixer")({}), require('postcss-css-variables') ];
+const common = [
+  require("autoprefixer")({ browsers: ['last 2 versions', 'iOS >= 8'] }),
+  require('postcss-css-variables'),
+  require('postcss-calc')
+];
 
 const plugins = process.env.ENV === "production" ?
   [
@@ -7,8 +11,4 @@ const plugins = process.env.ENV === "production" ?
   ] : common;
 
 
-module.exports = {
-  parser: "postcss-scss",
-  syntax: "postcss-scss",
-  plugins
-};
+module.exports = { plugins };
