@@ -43,16 +43,15 @@ const WebpackConfig = {
             comparisons: false,
             inline: 2
           },
-          mangle: {
-            safari10: true
-          },
+          mangle: true,
           output: {
             ecma: 5,
             comments: false,
             ascii_only: true
-          }
+          },
+          safari10: true,
         },
-        parallel: true,
+        parallel: 2,
         cache: true,
         sourceMap: true
       })

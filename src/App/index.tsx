@@ -1,7 +1,6 @@
 /**
  * Entry point to `App`, presently mounts `MyAmazingButton` component
  */
-import "@babel/polyfill";
 import * as React from "react";
 import { render } from "react-dom";
 import { MyAmazingButton } from "../components/Button";
