@@ -18,7 +18,7 @@ Testing is run through `jest` & `enzyme` which has been configured for `TypeScri
 - `npm run test` runs jest.
 - `npm run test:watch` runs jest in watch mode and will watch files for changes re-running tests.
 
-# Modes: Development | Production 🖥 🎪
+# Modes: Development 🖥 | Production  🎪
 
 ## Development 🖥
 
