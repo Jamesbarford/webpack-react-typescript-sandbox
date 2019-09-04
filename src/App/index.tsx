@@ -4,13 +4,12 @@
 import * as React from "react";
 import { render } from "react-dom";
 import { MyAmazingButton } from "../components/Button";
-import "./style.scss";
 
-const App: React.FunctionComponent = () => (
+const App: React.FC = () => (
   <div>
     hello world
     <MyAmazingButton />
   </div>
 );
 
-render( <App />, document.getElementById("root") );
+render(<App />, document.getElementById("root"));

@@ -2,35 +2,56 @@ const path = require("path");
 const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const CleanWebpackPlugin = require("clean-webpack-plugin");
-const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
+const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
+
 const babelConfig = require("./babel.config");
 
-const production = process.env.ENV === "production";
-const analyse = process.env.ENV === "analyse";
-const development = process.env.ENV === "development";
+const production = process.env.NODE_ENV === "production";
+const development = process.env.NODE_ENV === "development";
 const mode = development ? "development" : "production";
 
-console.log({ development, production, analyse });
+console.log(`Build ENV: ${mode.toUpperCase()}`);
+
+// Load polyfills first
+const entry = ["core-js/stable", "whatwg-fetch", "./src/app/index.tsx"];
+
+// this could be split into different files for plugins you only want for development / production
+const plugins = [
+  new MiniCssExtractPlugin({ filename: "[name].[contenthash].css" }),
+  new HtmlWebpackPlugin({ template: "template.html" }),
+  new webpack.HashedModuleIdsPlugin() // keep hash consistent between builds
+];
+
+if (development) {
+  plugins.push(
+    new ForkTsCheckerWebpackPlugin({
+      tslint: true,
+      tsconfig: path.resolve(__dirname, "tsconfig.json"),
+      tslint: path.resolve(__dirname, "./src/tslint.json")
+    })
+  );
+}
+
+if (production) {
+  plugins.push(new CleanWebpackPlugin());
+}
 
 const WebpackConfig = {
-  entry: "./src/app/index.tsx",
+  entry,
   mode,
   output: {
     filename: "[name].[contenthash].js",
-    path: path.resolve(__dirname, "dist")
+    path: path.resolve(__dirname, "dist"),
+    pathinfo: development ? false : true
   },
-  plugins: [
-    new MiniCssExtractPlugin({ filename: "[name].[contenthash].css" }),
-    new CleanWebpackPlugin(["dist"]),
-    new HtmlWebpackPlugin({ template: "template.html" }),
-    new webpack.HashedModuleIdsPlugin(), // so that file hashes don"t change unexpectedly
-  ],
+  plugins,
   // To split chunks
   optimization: {
     runtimeChunk: "single",
-    minimize: !development,
+    // Only minimize if you are not in development. This is quite a costly step.
+    minimize: production,
     minimizer: [
       new TerserPlugin({
         terserOptions: {
@@ -41,7 +62,9 @@ const WebpackConfig = {
             ecma: 5,
             warnings: false,
             comparisons: false,
-            inline: 2
+            inline: 2,
+            // if you write a while loop, this will preserve it.
+            loops: false
           },
           mangle: true,
           output: {
@@ -49,30 +72,46 @@ const WebpackConfig = {
             comments: false,
             ascii_only: true
           },
-          safari10: true,
+          safari10: true
         },
         parallel: 2,
         cache: true,
         sourceMap: true
       })
-   ],
+    ],
     splitChunks: {
       chunks: "all",
       minSize: 0,
       maxInitialRequests: Infinity,
-      cacheGroups: {
-        vendor: {
-          test: /[\\/]node_modules[\\/]/,
-          name(module) {
-            const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
-            return `npm.${packageName.replace("@", "")}`;
-          },
-        }
-      }
+      // Only do this for production builds, should mean dev compliations times are faster
+      cacheGroups: production
+        ? {
+            vendor: {
+              test: /[\\/]node_modules[\\/]/,
+              name({ issuer }) {
+                const { buildInfo } = issuer;
+                const fullDir = buildInfo.fileDependencies
+                  ? buildInfo.fileDependencies.entries().next().value[0]
+                  : "vendor";
+                if (fullDir === "vendor") {
+                  return fullDir;
+                }
+                const fullDirArr = fullDir.split("/");
+                const isNodeModule = fullDirArr.includes("node_modules") ? "npm." : "";
+                return `${isNodeModule}${fullDirArr[fullDirArr.length - 2]}-${fullDirArr[fullDirArr.length - 1]}`;
+              }
+            }
+          }
+        : {
+            vendor: {
+              test: /[\\/]node_modules[\\/]/,
+              name: "vendor"
+            }
+          }
     }
   },
-  devtool:
-    process.env.NODE_ENV === "development" ? "inline-source-map" : "source-map",
+  // slightly worse source map for dev, enables a faster re-build
+  devtool: development ? "inline-source-map" : "source-map",
   resolve: {
     extensions: [".js", ".json", ".ts", ".tsx"]
   },
@@ -94,64 +133,51 @@ const WebpackConfig = {
       {
         test: /favicon\.ico$/,
         loader: "url",
-        query: { 
+        query: {
           limit: 1,
-          name: "[name].[ext]",
+          name: "[name].[ext]"
         }
       },
       {
         test: /\.(ts|tsx)$/,
         exclude: /node_modules/,
-        enforce: "pre",
         use: [
           {
-            loader: "tslint-loader",
+            loader: "babel-loader",
             options: {
-              configFile: "./src/tslint.json"
+              presets: babelConfig.presets,
+              plugins: babelConfig.plugins,
+              cacheDirectory: true
+            }
+          },
+          {
+            loader: "ts-loader",
+            options: {
+              transpileOnly: true
             }
           }
         ]
       },
-      {
-        test: /\.(ts|tsx)$/,
-        exclude: /node_modules/,
-        use: [
-          {
-            loader: "awesome-typescript-loader",
-            options: {
-              useBabel: true,
-              transpileOnly: true,
-              babelOptions: {
-                babelrc: false,
-                presets: babelConfig.presets,
-                plugins: babelConfig.plugins
-              },
-              babelCore: "@babel/core"
-            }
-          }
-        ]
-      },
+      /**
+       * Style configurations, allows both `scss` & `css`
+       */
       {
         test: /\.(scss|css)$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          "css-loader",
-          "postcss-loader",
-          "sass-loader",
-        ]
+        use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader", "sass-loader"]
       },
+      /**
+       * for things like pictures
+       */
       {
         test: /\.(png|jpg|gif|svg|ico)$/,
         use: [
           {
             loader: "file-loader"
-          },
-        ],
-      },
+          }
+        ]
+      }
     ]
   }
 };
-
-if (analyse) WebpackConfig.plugins.push(new BundleAnalyzerPlugin());
 
 module.exports = WebpackConfig;

@@ -2,8 +2,8 @@
   "compilerOptions": {
     "module": "commonjs",
     "noImplicitAny": true,
-    "lib": ["es2018", "dom"],
-    "target": "es2018",
+    "lib": ["esnext", "dom"],
+    "target": "esnext",
     "sourceMap": true,
     "jsx": "react"
   },

@@ -1,4 +1,3 @@
-///<reference types="jest" />
 import * as React from "react";
 import { shallow } from "enzyme";
 import { MyAmazingButton } from "./index";
@@ -10,7 +9,9 @@ describe("MyAmazingButton", () => {
     const buttonState = button.state(btnColor);
   
     expect(buttonState).toEqual("red");
+
     button.find("button").simulate("mouseEnter");
+
     expect(button.state(btnColor)).toEqual("blue");
   });
 

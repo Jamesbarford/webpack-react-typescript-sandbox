@@ -8,12 +8,10 @@ It is highly configurable and provides a solid base to build projects off with t
 Testing is run through `jest` & `enzyme` which has been configured for `TypeScript`. Yahoo!
 
 # Install 💾
-## Requirements: node v 8.12^ & npm  or yarn🚩
+## Requirements: node v 10^ & npm  or yarn🚩
 - `npm install` or `yarn` to install dev & dependencies.
 - `npm start` to run the app in development mode.
 - `npm build` to build app in production mode.
-- `npm build:analyse`, a bit of hack slash implementation but 
-could be useful to view the size of the dependancies and dev code written. 
 - `npm run test` runs jest.
 - `npm run test:watch` runs jest in watch mode and will watch files for changes re-running tests.
 
@@ -30,5 +28,4 @@ could be useful to view the size of the dependancies and dev code written.
 
 #### N.B 😮
 - For `scss` files currently they would need to be `imported` into `src/App/style.scss` and would be bundled into one `css` file, when in `production` mode this is minfied yahoo!
-- If moving `style.scss` out of `App` change the location in `webpack.config.js`
 

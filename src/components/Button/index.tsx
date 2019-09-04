@@ -4,33 +4,33 @@
  */
 
 import * as React from "react";
+import "./style.scss";
 
 interface MyAmazingButtonState {
   btnColor: string;
-  color: string;
 }
 
 export class MyAmazingButton extends React.Component<{}, MyAmazingButtonState> {
-
   state: MyAmazingButtonState = {
-    btnColor: "red",
-    color: "white"
-  }
+    btnColor: "red"
+  };
 
-  handleOnMouseEnter = () => this.setState({ btnColor: "blue" });
-
-  handleOnMouseLeave = () => this.setState({ btnColor: "red" });
+  toggleButtonColor = () => {
+    this.setState(({ btnColor }) => ({
+      btnColor: btnColor === "blue" ? "red" : "blue"
+    }));
+  };
 
   render() {
     return (
       <button
         className="example"
-        onMouseEnter={this.handleOnMouseEnter}
-        onMouseLeave={this.handleOnMouseLeave}
+        onMouseEnter={this.toggleButtonColor}
+        onMouseLeave={this.toggleButtonColor}
         style={{ backgroundColor: this.state.btnColor }}
       >
-        My button
+        button
       </button>
-    )
+    );
   }
 }

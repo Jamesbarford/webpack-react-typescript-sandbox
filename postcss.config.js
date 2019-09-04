@@ -1,10 +1,10 @@
 const common = [
-  require("autoprefixer")({ browsers: ['last 2 versions', 'iOS >= 8'] }),
+  require("autoprefixer"),
   require('postcss-css-variables'),
   require('postcss-calc')
 ];
 
-const plugins = process.env.ENV === "production" ?
+const plugins = process.env.NODE_ENV === "production" ?
   [
     require("cssnano")({ preset: 'default' }),
    ...common
