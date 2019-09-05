@@ -60,7 +60,6 @@ const WebpackConfig = {
           },
           compress: {
             ecma: 5,
-            warnings: false,
             comparisons: false,
             inline: 2,
             // if you write a while loop, this will preserve it.
@@ -74,7 +73,7 @@ const WebpackConfig = {
           },
           safari10: true
         },
-        parallel: 2,
+        parallel: true,
         cache: true,
         sourceMap: true
       })
