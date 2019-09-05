@@ -6,6 +6,7 @@
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
     "lib": ["esnext", "dom"],
+    "sourceMap": true,
     "jsx": "react",
     "resolveJsonModule": true,
     "noEmit": true,
