@@ -15,7 +15,7 @@ const mode = development ? "development" : "production";
 console.log(`Build ENV: ${mode.toUpperCase()}`);
 
 // Load polyfills first
-const entry = ["core-js/stable", "whatwg-fetch", "./src/app/index.tsx"];
+const entry = ["core-js/stable", "whatwg-fetch", "./src/App/index.tsx"];
 
 // this could be split into different files for plugins you only want for development / production
 const plugins = [
